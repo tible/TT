@@ -7,9 +7,15 @@ class Dice():
 
     def throw(self):
         d1 = random.randint(0,self.faces)
-        print (d1)
-        #return d1
+        #print (d1)
+        return d1
 
 
 dice_1 = Dice(12)
-dice_1.throw()
+dice_2 = Dice(12)
+
+d1 = dice_1.throw()
+d2 = dice_2.throw()
+print(d1, " * ", d2,  " = ", d1*d2 )
+ 
+
