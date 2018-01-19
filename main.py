@@ -13,18 +13,36 @@ from curses import KEY_RIGHT, KEY_LEFT, KEY_UP, KEY_DOWN
 
 from random import randint
 
+def createTilePool():
+    for i in range(0,11):
+        for j in range(0,11):
+#        print '*********', i, '*', j, '=', i*j
+            if i*j not in tilePool:
+                tilePool.append(i*j)
+                tilePoolCount.append(1)
+            else:
+                tilePoolCount[tilePool.index(i*j)]+=1
+    return
+
+
 # initialize the screen
 curses.initscr()
+
 # define the screen size
 win = curses.newwin(20, 60, 0, 0)
+
 # curses interprets input from keyboard
 win.keypad(1)
+
 # Leave echo mode. Echoing of input characters is turned off.
 curses.noecho()
+
 # Set the cursor state. visibility can be set to 0, 1, or 2, for invisible, normal, or very visible.
 curses.curs_set(0)
+
 # Draws a border around the screen
 win.border(0)
+
 # If yes is 1, getch() will be non-blocking.
 win.nodelay(1)
 
@@ -32,15 +50,13 @@ win.nodelay(1)
 tilePool = []
 tilePoolCount = []
 
-for i in range(0,11):
-    for j in range(0,11):
-#        print '*********', i, '*', j, '=', i*j 
-        if i*j not in tilePool:
-            tilePool.append(i*j)
-            tilePoolCount.append(1)
-        else:
-            tilePoolCount[tilePool.index(i*j)]+=1
-# TODO adjust tileMatrix to hold valid values only. 
+##########################################################
+# creating the pool of valid tile values
+# actual results of two numbers between [0,10]
+createTilePool()
+##########################################################
+
+# TODO adjust tileMatrix to hold valid values only.
 tileMatrix = numpy.random.random_integers(100,size=(4,4))
 for i in range(0,4):
     for j in range(0,4):
