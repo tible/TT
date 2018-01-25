@@ -1,4 +1,4 @@
-############################################################################################
+###########################################################################################
 # Date:    2nd Jan, 2018                  # TimesTable is a game that my 6yo daughter used #
 # Author:  Tiberiu Gociu                  # to play to learn the ... times table! :)       #
 # Project: Times Table self playing game  # This exercise is to have a program that plays  #
@@ -60,7 +60,10 @@ createTilePool()
 tileMatrix = numpy.random.random_integers(100,size=(4,4))
 for i in range(0,4):
     for j in range(0,4):
-        tileMatrix[i][j]=tilePool[numpy.random.random_integers(42,size=(1))]
+        tile = tilePool[numpy.random.random_integers(42,size=(1))]
+        while tile not in tileMatrix :
+            tileMatrix[i][j] = tile
+            tile = tilePool[numpy.random.random_integers(42,size=(1))]
 # create the matrix to hold the matched tile values
 matchedTileMatrix = numpy.zeros((4,4), int) 
 # assigning a value to KEY_RIGHT
@@ -127,7 +130,7 @@ while key != 27:
  
     win.addstr(4, 27, str(len(numpy.argwhere(tileMatrix == xx*yy))))
     
-    win.timeout(1000) 
+    win.timeout(2000) 
     prevKey = key                                                  # Previous key pressed
     event = win.getch()
     key = key if event == -1 else event 
